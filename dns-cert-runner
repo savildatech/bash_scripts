@@ -1,0 +1,8 @@
+#!/bin/bash
+
+certbot certonly -n --agree-tos \
+-m savildatechnology@gmail.com \
+--dns-cloudflare \
+--dns-cloudflare-credentials /home/linuxuser/.secrets/cloudflare.ini \
+--dns-cloudflare-propagation-seconds 240 \
+$@
