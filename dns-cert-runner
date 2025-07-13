@@ -1,6 +1,7 @@
 #!/bin/bash
 
 email='your_email@email_domain.com' #change this
+wait_seconds='180'
 
 ### be careful with this script, it doesn't have great validation ###
 ### Expects one or multiple -d flags with one domain/subdomain each ###
@@ -18,5 +19,5 @@ certbot certonly -n --agree-tos \
 -m $email \
 --dns-cloudflare \
 --dns-cloudflare-credentials /home/<user>/.secrets/cloudflare.ini \
---dns-cloudflare-propagation-seconds 240 \
+--dns-cloudflare-propagation-seconds $wait_seconds \
 $@
