@@ -1,8 +1,22 @@
 #!/bin/bash
 
+email='your_email@email_domain.com' #change this
+
+### be careful with this script, it doesn't have great validation ###
+### Expects one or multiple -d flags with one domain/subdomain each ###
+### cloudflare.ini should contain: "dns_cloudflare_api_token = <insert-cloudflare-token-here>" (Exclude quotes) ###
+
+### works on debian/ubuntu ###
+
+#sudo apt update && sudo apt upgrade -y
+#[ ! $? -eq 0 ] echo 'failed to upgrade apt' && exit 1
+
+[ $# -lt 2 ] echo 'you need to add your -d flag, followed by the (sub)domain you want, supports multiple -d entries' && exit 1
+
+
 certbot certonly -n --agree-tos \
--m savildatechnology@gmail.com \
+-m $email \
 --dns-cloudflare \
---dns-cloudflare-credentials /home/linuxuser/.secrets/cloudflare.ini \
+--dns-cloudflare-credentials /home/<user>/.secrets/cloudflare.ini \
 --dns-cloudflare-propagation-seconds 240 \
 $@
