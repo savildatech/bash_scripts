@@ -2,6 +2,7 @@
 
 email='your_email@email_domain.com' #change this
 wait_seconds='180' #wait (seconds) for dns propagation
+ini_file='/home/<user>/.secrets/cloudflare.ini'
 
 ### be careful with this script, it doesn't have great validation ###
 ### Expects one or multiple -d flags with one domain/subdomain each ###
@@ -18,7 +19,7 @@ wait_seconds='180' #wait (seconds) for dns propagation
 certbot certonly -n --agree-tos \
 -m $email \
 --dns-cloudflare \
---dns-cloudflare-credentials /home/<user>/.secrets/cloudflare.ini \
+--dns-cloudflare-credentials $ini_file \
 --dns-cloudflare-propagation-seconds $wait_seconds \
 #--config-dir /use/custom/config/directory \
 $@
