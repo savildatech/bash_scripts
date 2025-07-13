@@ -1,7 +1,7 @@
 #!/bin/bash
 
 email='your_email@email_domain.com' #change this
-wait_seconds='180'
+wait_seconds='180' #wait (seconds) for dns propagation
 
 ### be careful with this script, it doesn't have great validation ###
 ### Expects one or multiple -d flags with one domain/subdomain each ###
@@ -12,7 +12,7 @@ wait_seconds='180'
 #sudo apt update && sudo apt upgrade -y
 #[ ! $? -eq 0 ] echo 'failed to upgrade apt' && exit 1
 
-[ $# -lt 2 ] echo 'you need to add your -d flag, followed by the (sub)domain you want, supports multiple -d entries' && exit 1
+[ $# -lt 1 ] echo 'you need to add your -d flag, followed by the (sub)domain you want, supports multiple -d entries' && exit 1
 
 
 certbot certonly -n --agree-tos \
