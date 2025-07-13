@@ -20,4 +20,5 @@ certbot certonly -n --agree-tos \
 --dns-cloudflare \
 --dns-cloudflare-credentials /home/<user>/.secrets/cloudflare.ini \
 --dns-cloudflare-propagation-seconds $wait_seconds \
+#--config-dir /use/custom/config/directory \
 $@
