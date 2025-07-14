@@ -12,6 +12,8 @@ ini_file='/home/<user>/.secrets/cloudflare.ini'
 ### be careful with this script, it doesn't have great validation ###
 ### Expects one or multiple -d flags with one domain/subdomain each ###
 ### cloudflare.ini should contain: "dns_cloudflare_api_token = <insert-cloudflare-token-here>" (Exclude quotes) ###
+### You should run 'chmod 600' on cloudflare.ini ###
+
 
 ### works on debian/ubuntu ###
 
