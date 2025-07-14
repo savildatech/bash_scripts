@@ -14,7 +14,7 @@ ini_file='/home/<user>/.secrets/cloudflare.ini'
 
 ### works on debian/ubuntu ###
 
-[ $# -lt 1 ] echo 'you need to add your -d flag, followed by the (sub)domain you want, supports multiple -d entries' && exit 1
+[ $# -lt 1 ] && echo 'you need to add your -d flag, followed by the (sub)domain you want, supports multiple -d entries' && exit 1
 
 if [ "$install_certbot" == '1' ]; then
   apt update
