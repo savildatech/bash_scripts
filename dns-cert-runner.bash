@@ -3,7 +3,7 @@
 ### Certbot requires root, unless you change settings (...and apt) ###
 [ ! "$(whoami)" == "root" ] && echo 'You must be root! try again...' && exit 1
 
-install_cerbot='0' #change to '1' if you want to install certbot
+install_certbot='0' #change to '1' if you want to install certbot
 email='your_email@email_domain.com' #change this
 wait_seconds='180' #wait (seconds) for dns propagation
 ini_file='/home/<user>/.secrets/cloudflare.ini'
