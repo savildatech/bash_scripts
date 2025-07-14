@@ -1,5 +1,9 @@
 #!/bin/bash
 
+### Certbot requires root, unless you change settings (...and apt) ###
+[ ! "$(whoami)" == "root" ] && echo 'You must be root! try again...' && exit 1
+
+install_cerbot='0' #change to '1' if you want to install certbot
 email='your_email@email_domain.com' #change this
 wait_seconds='180' #wait (seconds) for dns propagation
 ini_file='/home/<user>/.secrets/cloudflare.ini'
@@ -10,16 +14,22 @@ ini_file='/home/<user>/.secrets/cloudflare.ini'
 
 ### works on debian/ubuntu ###
 
-#sudo apt update && sudo apt upgrade -y
-#[ ! $? -eq 0 ] echo 'failed to upgrade apt' && exit 1
-
 [ $# -lt 1 ] echo 'you need to add your -d flag, followed by the (sub)domain you want, supports multiple -d entries' && exit 1
 
+if [ "$install_certbot" == '1' ]; then
+  apt update
+  [ $? -ne 0 ] && echo 'failed to update apt' && exit 1
+  apt upgrade -y
+  [ $? -ne 0 ] && echo 'failed to upgrade apt' && exit 1
+  apt install -y python3-certbot
+  [ $? -ne 0 ] && echo 'failed to install python3-certbot' && exit 1
+  apt install -y python3-certbot-dns-cloudflare
+  [ $? -ne 0 ] && echo 'failed to install python3-certbot-dns-cloudflare' && exit 1
+fi
 
 certbot certonly -n --agree-tos \
--m $email \
+-m "$email" \
 --dns-cloudflare \
---dns-cloudflare-credentials $ini_file \
---dns-cloudflare-propagation-seconds $wait_seconds \
-#--config-dir /use/custom/config/directory \
+--dns-cloudflare-credentials "$ini_file" \
+--dns-cloudflare-propagation-seconds "$wait_seconds" \
 $@
